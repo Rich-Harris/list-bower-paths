@@ -20,16 +20,16 @@ var listBowerPaths = function ( options, cb ) {
 	}
 
 	if ( options.sync ) {
-		return doSync( cwd, bowerrc );
+		return doSync( cwd, bowerrc, options.relative );
 	}
 
-	promise = doAsync( cwd, bowerrc );
+	promise = doAsync( cwd, bowerrc, options.relative );
 	if ( cb ) promise.then( cb );
 
 	return promise;
 };
 
-function doSync ( cwd, bowerrc ) {
+function doSync ( cwd, bowerrc, relative ) {
 	var bower_components, paths;
 
 	bower_components = path.join( cwd, JSON.parse( fs.readFileSync( bowerrc ).toString() ).directory || 'bower_components' );
@@ -38,7 +38,7 @@ function doSync ( cwd, bowerrc ) {
 	glob.sync( path.join( bower_components, '*/.bower.json' ) ).forEach( function ( bowerFile ) {
 		var dir, name, json, config, main;
 
-		dir = path.dirname( bowerFile ).replace( cwd + '/', '' );
+		dir = path.dirname( bowerFile ).replace( ( relative ? bower_components : cwd ) + '/', '' );
 
 		json = fs.readFileSync( bowerFile ).toString();
 		config = JSON.parse( json );
@@ -52,7 +52,7 @@ function doSync ( cwd, bowerrc ) {
 	return paths;
 }
 
-function doAsync ( cwd, bowerrc, cb ) {
+function doAsync ( cwd, bowerrc, base, cb ) {
 	return readFile( bowerrc ).then( function ( result ) {
 		var bower_components, paths;
 
@@ -66,7 +66,7 @@ function doAsync ( cwd, bowerrc, cb ) {
 				return readFile( bowerFile ).then( function ( result ) {
 					var dir, name, json, config, main;
 
-					dir = path.dirname( bowerFile ).replace( cwd + '/', '' );
+					dir = path.dirname( bowerFile ).replace( ( relative ? bower_components : cwd ) + '/', '' );
 
 					json = result.toString();
 					config = JSON.parse( json );
