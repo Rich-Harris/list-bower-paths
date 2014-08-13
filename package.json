@@ -1,0 +1,10 @@
+{
+  "name": "list-bower-paths",
+  "version": "0.1.0",
+  "description": "List paths to bower components",
+  "dependencies": {
+    "promo": "^0.1.1",
+    "glob": "^4.0.5",
+    "findup-sync": "^0.1.3"
+  }
+}
