@@ -7,7 +7,7 @@ Get paths for bower modules, from the `main` property of `bower.json` files.
 
 If you use bower for dependency management, and have a build process that bundles up an app composed of AMD modules (e.g. with the RequireJS optimizer), you probably need to know the location on disk of the modules you're `require()`ing.
 
-You can run `bower list --path` on the command line, or (if you're using a node.js build tool like [grunt](http://gruntjs.com/) or [gobble](https://github.com/gobblejs)) run it in a child process then capture and parse the result, but *boy* is it slow. You certainly don't want to have to do it each time you build.
+You can run `bower list --paths` on the command line, or (if you're using a node.js build tool like [grunt](http://gruntjs.com/) or [gobble](https://github.com/gobblejs)) run it in a child process then capture and parse the result, but *boy* is it slow. You certainly don't want to have to do it each time you build.
 
 This module offers a better way.
 
