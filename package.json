@@ -2,6 +2,12 @@
   "name": "list-bower-paths",
   "version": "0.1.2",
   "description": "List paths to bower components",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
   "dependencies": {
     "promo": "^0.1.1",
     "glob": "^4.0.5",
